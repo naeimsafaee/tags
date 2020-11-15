@@ -118,4 +118,14 @@ class TagController extends Controller{
         $tag->delete();
         return response()->json(["message" => "tag deleted successfully!"]);
     }
+
+    public function search_tags(Request $request){
+
+        if(!isset($request->search))
+            return response()->json(["message" => "please enter search word!"] , 400);
+
+        $tags = Tag::query()->where("name" , "LIKE" , "%" . $request->search . "%")->get();
+
+        return response()->json($tags);
+    }
 }

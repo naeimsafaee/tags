@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource("tags" , \App\Http\Controllers\api\TagController::class);
 Route::apiResource("articles" , \App\Http\Controllers\api\ArticleController::class);
 Route::apiResource("products" , \App\Http\Controllers\api\ProductController::class);
+
+Route::post("search_tag" , [\App\Http\Controllers\api\TagController::class , "search_tags"]);
