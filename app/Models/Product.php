@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model{
     use HasFactory;
 
+    protected $fillable = ["title"];
 
     public function tags(){
         return $this->morphToMany(Tag::class, 'taggable');

@@ -17,7 +17,9 @@ class CreateTagsTable extends Migration{
             $table->text("description")->nullable();
             $table->unsignedBigInteger("image_id");
             $table->timestamps();
+
         });
+
     }
 
     /**

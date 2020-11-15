@@ -3,78 +3,119 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\Image;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller{
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(){
-        //
+        return response()->json(Tag::paginate(10));
     }
 
     /**
      * Store a newly created resource in storage.
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request){
 
-        $validatedData = $request->validate([
-            'name' => 'required|unique:posts|max:255',
-            'slug' => 'required|unique:posts|max:255',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:tags|max:255',
+            'slug' => 'required|unique:tags|max:255',
             'description' => 'required',
             'image' => 'required|image',
-            "product_id" => [
-                function ($attribute, $value, $fail) {
-                    if(!isset($attribute->product_id)){
-                        if(!isset($attribute->article_id)){
-                            $fail("one of product_id or article_id is required!");
-                            return;
-                        }
-                    }
-                },
-            ],
-            "article_id" => "",
         ]);
 
-        return response()->json("everything is ok!");
-        $post = Product::query()->find(1);
+        if($validator->fails())
+            return response()->json($validator->errors(), 400);
 
-        $comment = $post->comments()->create([
-            'message' => 'A new comment.',
+        $path = $request->file('image')->store('/images/');
+
+        $image = Image::query()->create([
+            "path" => $path,
         ]);
 
+        /*if(isset($request->product_id)){
+            $model = Product::query()->find($request->product_id);
+        } else {
+            $model = Article::query()->find($request->article_id);
+        }
+        $model->tags()
+        */
 
+        $tag = Tag::query()->create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description,
+            'image_id' => $image->id,
+        ]);
+
+        return response()->json($tag);
     }
 
     /**
      * Display the specified resource.
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id){
-        //
+        return response()->json(Tag::query()->findOrFail($id));
     }
 
     /**
      * Update the specified resource in storage.
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id){
-        //
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:tags|max:255',
+            'slug' => 'required|unique:tags|max:255',
+            'description' => 'required',
+            'image' => 'nullable|image',
+        ]);
+
+        if($validator->fails())
+            return response()->json($validator->errors(), 400);
+
+        $tag = Tag::query()->findOrFail($id);
+
+        if(isset($request->image)){
+            $path = $request->file('image')->store('/images/');
+
+            $image = Image::query()->create([
+                "path" => $path,
+            ]);
+            $tag->image_id = $image->id;
+        }
+
+        $tag->name = $request->name;
+        $tag->slug = $request->name;
+        $tag->description = $request->name;
+        $tag->save();
+
+        return response()->json($tag);
+
     }
 
     /**
      * Remove the specified resource from storage.
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id){
-        //
+        $tag = Tag::query()->findOrFail($id);
+        $tag->delete();
+        return response()->json(["message" => "tag deleted successfully!"]);
     }
 }
