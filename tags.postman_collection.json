@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "e9e71d33-7bdc-4812-a194-52967469c07d",
+		"name": "tags",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tag",
+			"item": [
+				{
+					"name": "create tag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "hotest1",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "hotest1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "ifdfkjdfsklndfskn",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/naeim/Pictures/plants/output-onlinepngtools (2).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/tags",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search tags",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search",
+									"value": "hote",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/search_tag",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"search_tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update tag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "hotest",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "hotest",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "ifdfkjdfsklndfskn",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/tags/1?_method=PUT",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"tags",
+								"1"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PUT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete tag",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "hotest",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "hotest",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "ifdfkjdfsklndfskn",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "article_id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/naeim/Pictures/plants/output-onlinepngtools.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/tags/4",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"tags",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/tags?page=1",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"tags"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/tags/1",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"tags",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "product one",
+									"type": "text"
+								},
+								{
+									"key": "tag_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/products",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "article",
+			"item": [
+				{
+					"name": "create article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "article one",
+									"type": "text"
+								},
+								{
+									"key": "tag_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://tags.paachinmezon.ir/api/articles",
+							"protocol": "http",
+							"host": [
+								"tags",
+								"paachinmezon",
+								"ir"
+							],
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
